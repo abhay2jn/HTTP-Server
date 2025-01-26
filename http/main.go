@@ -8,9 +8,9 @@ import (
 func main() {
 	http.HandleFunc("/", route)
 
-	// Got an error when you go to error route
-	fs := http.FileServer(http.Dir("/error"))
-	http.Handle("/error/", http.StripPrefix("/error/", fs))
+	// file server is in place, we just need to point a url path at it
+	fs := http.FileServer(http.Dir("/static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	//HTTP server and listen for connection on port localhost:2222
 	http.ListenAndServe(":2222", nil)
